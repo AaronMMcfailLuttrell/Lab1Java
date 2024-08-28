@@ -24,7 +24,7 @@ public class Register {
             countCurrency[i] = 0;
         }
 
-        int decimalVal = (int)((amt * 100) % 100);
+        int centCount = (int)((amt * 100) % 100);
 
         /*
         * int[0] = $100 bill, int[1] = $50, int[2] = $20, int[3] = $10, int[4] = $5
@@ -32,66 +32,87 @@ public class Register {
         * int[10] = $.01
         */
 
-        while (amt > 0.0) {
-            if (amt >= 100) {
-                amt -= 100;
-                countCurrency[0]++;
-            } else if (amt >= 50) {
-                amt -= 50;
-                countCurrency[1]++;
-            } else if (amt >= 20) {
-                amt -= 20;
-                countCurrency[2]++;
-            } else if (amt >= 10) {
-                amt -= 10;
-                countCurrency[3]++;
-            } else if (amt >= 5) {
-                amt -= 5;
-                countCurrency[4]++;
-            } else if (amt >= 1) {
-                amt -= 1;
-                countCurrency[5]++;
-            } else if (decimalVal >= 50) {
-                decimalVal -= 50;
-                countCurrency[6]++;
-            } else if (decimalVal >= 25) {
-                decimalVal -= 25;
-                countCurrency[7]++;
-            } else if (decimalVal >= 10) {
-                decimalVal -= 10;
-                countCurrency[8]++;
-            } else if (decimalVal >= 5) {
-                decimalVal -= 5;
-                countCurrency[9]++;
-            } else if (decimalVal >= 1) {
-                decimalVal -= 1;
-                countCurrency[10]++;
-            }
+        int amtInt = (int) amt;
+
+        while (amtInt >= 100) {
+            amtInt -= 100;
+            countCurrency[0]++;
+        }
+        while (amtInt >= 50) {
+            amtInt -= 50;
+            countCurrency[1]++;
+        }
+        while (amtInt >= 20) {
+            amtInt -= 20;
+            countCurrency[2]++;
+        }
+        while (amtInt >= 10) {
+            amtInt -= 10;
+            countCurrency[3]++;
+        }
+        while (amtInt >= 5) {
+            amtInt -= 5;
+            countCurrency[4]++;
+        }
+        while (amtInt >= 1) {
+            amtInt -= 1;
+            countCurrency[5]++;
+        }
+        while (centCount >= 50) {
+            centCount -= 50;
+            countCurrency[6]++;
+        }
+        while (centCount >= 25) {
+            centCount -= 25;
+            countCurrency[7]++;
+        }
+        while (centCount >= 10) {
+            centCount -= 10;
+            countCurrency[8]++;
+        }
+        while (centCount >= 5) {
+            centCount -= 5;
+            countCurrency[9]++;
+        }
+        while (centCount >= 1) {
+            centCount -= 1;
+            countCurrency[10]++;
         }
 
 
         Purse tempPurse = new Purse();
+
         if (countCurrency[0] != 0) {
             tempPurse.add(Hundred, countCurrency[0]);
-        } else if (countCurrency[1] != 0) {
+        }
+        if (countCurrency[1] != 0) {
             tempPurse.add(Fifty, countCurrency[1]);
-        } else if (countCurrency[2] != 0) {
+        }
+        if (countCurrency[2] != 0) {
             tempPurse.add(Twenty, countCurrency[2]);
-        } else if (countCurrency[3] != 0) {
+        }
+        if (countCurrency[3] != 0) {
             tempPurse.add(Ten, countCurrency[3]);
-        } else if (countCurrency[4] != 0) {
+        }
+        if (countCurrency[4] != 0) {
             tempPurse.add(Five, countCurrency[4]);
-        } else if (countCurrency[5] != 0) {
+        }
+        if (countCurrency[5] != 0) {
             tempPurse.add(One, countCurrency[5]);
-        } else if (countCurrency[6] != 0) {
+        }
+        if (countCurrency[6] != 0) {
             tempPurse.add(FiftyCent, countCurrency[6]);
-        } else if (countCurrency[7] != 0) {
+        }
+        if (countCurrency[7] != 0) {
             tempPurse.add(Quarter, countCurrency[7]);
-        } else if (countCurrency[8] != 0) {
+        }
+        if (countCurrency[8] != 0) {
             tempPurse.add(Dime, countCurrency[8]);
-        } else if (countCurrency[9] != 0) {
+        }
+        if (countCurrency[9] != 0) {
             tempPurse.add(Nickle, countCurrency[9]);
-        } else if (countCurrency[10] != 0) {
+        }
+        if (countCurrency[10] != 0) {
             tempPurse.add(Penny, countCurrency[10]);
         }
 
@@ -102,7 +123,7 @@ public class Register {
     public static void main(String[] args) {
 
         Register register = new Register();
-        double userValue;
+        double userValue = 0.0;
         Purse tempPurse;
         String printString;
 
@@ -112,9 +133,11 @@ public class Register {
         userValue = scan.nextDouble();
 
         tempPurse = register.makeChange(userValue);
-        printString = tempPurse.toString();
+        printString = tempPurse.toTheString();
 
         System.out.println(printString);
+
+        System.out.println("The Purse value is: " + tempPurse.getValue());
 
     }
 
