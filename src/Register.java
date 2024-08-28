@@ -24,6 +24,8 @@ public class Register {
             countCurrency[i] = 0;
         }
 
+        int decimalVal = (int)((amt * 100) % 100);
+
         /*
         * int[0] = $100 bill, int[1] = $50, int[2] = $20, int[3] = $10, int[4] = $5
         * int[5] = $1 bill, int[6] = $.50, int[7] = $.25, int[8] = $.10, int[9] = $.05
@@ -49,20 +51,20 @@ public class Register {
             } else if (amt >= 1) {
                 amt -= 1;
                 countCurrency[5]++;
-            } else if (amt >= .5) {
-                amt -= .5;
+            } else if (decimalVal >= 50) {
+                decimalVal -= 50;
                 countCurrency[6]++;
-            } else if (amt >= .25) {
-                amt -= .25;
+            } else if (decimalVal >= 25) {
+                decimalVal -= 25;
                 countCurrency[7]++;
-            } else if (amt >= .1) {
-                amt -= .1;
+            } else if (decimalVal >= 10) {
+                decimalVal -= 10;
                 countCurrency[8]++;
-            } else if (amt >= .05) {
-                amt -= .05;
+            } else if (decimalVal >= 5) {
+                decimalVal -= 5;
                 countCurrency[9]++;
-            } else if (amt >= .01) {
-                amt -= .01;
+            } else if (decimalVal >= 1) {
+                decimalVal -= 1;
                 countCurrency[10]++;
             }
         }
@@ -100,7 +102,7 @@ public class Register {
     public static void main(String[] args) {
 
         Register register = new Register();
-        double userValue = 0.0;
+        double userValue;
         Purse tempPurse;
         String printString;
 
