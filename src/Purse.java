@@ -31,9 +31,14 @@ public class Purse {
     }
 
     public String toTheString() {
+        Map<Denomination, Integer> tempDisplayMap = new HashMap();
+        for (Map.Entry<Denomination, Integer> entry : cash.entrySet()) {
+
+        }
         String returnString = "";
         for (Map.Entry<Denomination, Integer> entry : cash.entrySet()) {
-            returnString += entry.getKey().toString() + ": " + entry.getValue() + "\n";
+            Denomination placeholder = entry.getKey();
+            returnString += entry.getValue() + " " + placeholder.name() + "\n";
         }
         return returnString;
     }
