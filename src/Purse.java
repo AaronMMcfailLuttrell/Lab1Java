@@ -5,13 +5,16 @@ public class Purse {
     Map<Denomination, Integer> cash; //Represents the money in the purse
 
     public Purse() {
+        //Constructor that creates the HashMap, which stores the data about how much of each currency the user has
         this.cash = new HashMap<>();
     }
     public void add(Denomination MoneyType, int amount) {
+        //adds a specific type of currency and the amount they have of it to the map.
         cash.put(MoneyType, amount);
     }
 
     public double remove(Denomination MoneyType, int num) {
+        //Removes a type of currency and the amount the user removed
         cash.remove(MoneyType, num);
         return (cash.get(MoneyType.amt()) * num);
     }
@@ -32,7 +35,7 @@ public class Purse {
 
     public String toTheString() {
         Map<Denomination, Integer> tempDisplayMap = new HashMap();
-        String returnString = "";
+        String returnString = ""; //The string that will be returned; the loops build onto it
 
 
 
