@@ -126,7 +126,7 @@ public class Register {
         //tempPurse gets set to the purse that is created by register
         tempPurse = register.makeChange(userValue);
         //Just collects the string from the method toTheString which creates a string based on a map
-        printString = tempPurse.toTheString();
+        printString = tempPurse.toString();
 
         System.out.println(printString);
         

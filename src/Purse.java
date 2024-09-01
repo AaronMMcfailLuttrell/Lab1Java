@@ -30,7 +30,7 @@ public class Purse {
         return resultValue;
     }
 
-    public String toTheString() {
+    public String toString() {
         Map<Denomination, Integer> tempDisplayMap = new HashMap();
         String returnString = ""; //The string that will be returned; the loops build onto it
 
