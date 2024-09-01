@@ -4,16 +4,16 @@ import java.util.Scanner;
 public class Register {
 
     //Initialize the denominations to their associated string and value
-    private static final Denomination Hundred = new Denomination("Hundred-Dollar Note", 100.00, "bill", "Hundred.png");
-    private static final Denomination Fifty = new Denomination("Fifty-Dollar Note", 50.00, "bill", "Fifty.png");
-    private static final Denomination Twenty = new Denomination("Twenty-Dollar Note", 20.00, "bill", "Twenty.png");
-    private static final Denomination Ten = new Denomination("Ten-Dollar Note", 10.00, "bill", "Ten.png");
-    private static final Denomination Five = new Denomination("Five-Dollar Note", 5.00, "bill", "Five.png");
-    private static final Denomination One = new Denomination("One-Dollar Note", 1.00, "bill", "One.png");
-    private static final Denomination Quarter = new Denomination("Quarter", .25, "coin", "Quarter.png");
-    private static final Denomination Dime = new Denomination("Dime", .10, "coin", "Dime.png");
-    private static final Denomination Nickle = new Denomination("Nickle", .05, "coin", "Nickle.png");
-    private static final Denomination Penny = new Denomination("Penny", .01, "coin", "Penny.png");
+    public static final Denomination Hundred = new Denomination("Hundred-Dollar Note", 100.00, "bill", "src\\HundredNote.jpg");
+    public static final Denomination Fifty = new Denomination("Fifty-Dollar Note", 50.00, "bill", "src\\FiftyNote.jpg");
+    public static final Denomination Twenty = new Denomination("Twenty-Dollar Note", 20.00, "bill", "src\\TwentyNote.jpg");
+    public static final Denomination Ten = new Denomination("Ten-Dollar Note", 10.00, "bill", "src\\TenNote.jpg");
+    public static final Denomination Five = new Denomination("Five-Dollar Note", 5.00, "bill", "src\\FiveNote.jpg");
+    public static final Denomination One = new Denomination("One-Dollar Note", 1.00, "bill", "src\\OneNote.jpg");
+    public static final Denomination Quarter = new Denomination("Quarter", .25, "coin", "src\\Quarter.jpeg");
+    public static final Denomination Dime = new Denomination("Dime", .10, "coin", "src\\Dime.png");
+    public static final Denomination Nickle = new Denomination("Nickle", .05, "coin", "src\\Nickel.jpg");
+    public static final Denomination Penny = new Denomination("Penny", .01, "coin", "src\\Penny.png");
 
     //Calculate what amount of change to give the user (From highest value dollar to least value coin)
     Purse makeChange(double amt) {
@@ -26,10 +26,13 @@ public class Register {
         }
         //Test to see if there is something like .005 which rounds to .01
         double roundingCentCount = (amt * 100) % 100;
+
         //Captures the .005 if the user inserts something like 12.735
         int anyRoundingSolving = (int)((roundingCentCount * 10) % 10);
+
         //Finally manipulates the value to turn the decimal value of the dollar input into an integer (for easier calculation purposes)
         int centCount = (int)((amt * 100) % 100);
+
         //According to expected output, having .005 cent should yield 1 penny, so this will add if it registers a .005. Tests for 5, as the integer is testing that
         if (anyRoundingSolving >= 5) {
             centCount += 1;
@@ -68,6 +71,7 @@ public class Register {
             amtInt -= 1;
             countCurrency[5]++;
         }
+
         //Does similar calculations to the above dollars, but for the CENT integer
         while (centCount >= 25) {
             centCount -= 25;
@@ -87,42 +91,19 @@ public class Register {
         }
 
 
-        //Initialize a new Purse class to tempPurse ti be able to add values
+        //Initialize a new Purse class to tempPurse to be able to add values
         Purse tempPurse = new Purse();
 
         /*
         Adds the specific denomination dollars and the amount there are into the purse, only adds to the purse if the amount is != 0
         */
+        //For Iteration purposes
+        Denomination[] currencyType = {Hundred, Fifty, Twenty, Ten, Five, One, Quarter, Dime, Nickle, Penny};
 
-        if (countCurrency[9] != 0) {
-            tempPurse.add(Penny, countCurrency[9]);
-        }
-        if (countCurrency[8] != 0) {
-            tempPurse.add(Nickle, countCurrency[8]);
-        }
-        if (countCurrency[7] != 0) {
-            tempPurse.add(Dime, countCurrency[7]);
-        }
-        if (countCurrency[6] != 0) {
-            tempPurse.add(Quarter, countCurrency[6]);
-        }
-        if (countCurrency[5] != 0) {
-            tempPurse.add(One, countCurrency[5]);
-        }
-        if (countCurrency[4] != 0) {
-            tempPurse.add(Five, countCurrency[4]);
-        }
-        if (countCurrency[3] != 0) {
-            tempPurse.add(Ten, countCurrency[3]);
-        }
-        if (countCurrency[2] != 0) {
-            tempPurse.add(Twenty, countCurrency[2]);
-        }
-        if (countCurrency[1] != 0) {
-            tempPurse.add(Fifty, countCurrency[1]);
-        }
-        if (countCurrency[0] != 0) {
-            tempPurse.add(Hundred, countCurrency[0]);
+        for (int i = 0; i < 10; i++) {
+            if (countCurrency[i] != 0) {
+                tempPurse.add(currencyType[i], countCurrency[i]);
+            }
         }
 
         //Returns a purse

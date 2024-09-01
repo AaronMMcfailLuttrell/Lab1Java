@@ -20,16 +20,13 @@ public class Purse {
     }
 
     public double getValue() {
-
         double resultValue = 0.0;
-
-
+        //Loop iterates through the cash map and multiplies the amt it has to the amount of that currency they have, adds to resultValue
         for (Map.Entry<Denomination, Integer> entry : cash.entrySet()) {
-
             Denomination placeholder = entry.getKey();
             resultValue += (placeholder.amt() * entry.getValue());
-
         }
+
         return resultValue;
     }
 
@@ -37,94 +34,18 @@ public class Purse {
         Map<Denomination, Integer> tempDisplayMap = new HashMap();
         String returnString = ""; //The string that will be returned; the loops build onto it
 
+        //Array for storing information for future sorting
+        double[] DescendingValues = {100.00, 50.00,20.00, 10.00, 5.00, 1.00, .25, .10, .05, .01};
 
-
-
-
-        for (Map.Entry<Denomination, Integer> Hund : cash.entrySet()) {
-            Denomination placeholder = Hund.getKey();
-            if (placeholder.amt() == 100.00) {
-                returnString += Hund.getValue() + " " + Hund.getKey().name() + "\n";
+        for (int i = 0; i < DescendingValues.length; i++) {
+            for (Map.Entry<Denomination, Integer> entry : cash.entrySet()) {
+                Denomination placeholder = entry.getKey();
+                if (placeholder.amt() == DescendingValues[i]) {
+                    returnString += entry.getValue() + " " + placeholder.name() + "\n";
+                }
             }
-
         }
-
-        for (Map.Entry<Denomination, Integer> Fift : cash.entrySet()) {
-            Denomination placeholder = Fift.getKey();
-            if (placeholder.amt() == 50.00) {
-                returnString += Fift.getValue() + " " + Fift.getKey().name() + "\n";
-            }
-
-        }
-
-        for (Map.Entry<Denomination, Integer> Twent : cash.entrySet()) {
-            Denomination placeholder = Twent.getKey();
-            if (placeholder.amt() == 20.00) {
-                returnString += Twent.getValue() + " " + Twent.getKey().name() + "\n";
-            }
-
-        }
-
-        for (Map.Entry<Denomination, Integer> Tenb : cash.entrySet()) {
-            Denomination placeholder = Tenb.getKey();
-            if (placeholder.amt() == 10.00) {
-                returnString += Tenb.getValue() + " " + Tenb.getKey().name() + "\n";
-            }
-
-        }
-
-        for (Map.Entry<Denomination, Integer> Fiveb : cash.entrySet()) {
-            Denomination placeholder = Fiveb.getKey();
-            if (placeholder.amt() == 5.00) {
-                returnString += Fiveb.getValue() + " " + Fiveb.getKey().name() + "\n";
-            }
-
-        }
-
-        for (Map.Entry<Denomination, Integer> Oneb : cash.entrySet()) {
-            Denomination placeholder = Oneb.getKey();
-            if (placeholder.amt() == 1.00) {
-                returnString += Oneb.getValue() + " " + Oneb.getKey().name() + "\n";
-            }
-
-        }
-
-        for (Map.Entry<Denomination, Integer> Quart : cash.entrySet()) {
-            Denomination placeholder = Quart.getKey();
-            if (placeholder.amt() == .25) {
-                returnString += Quart.getValue() + " " + Quart.getKey().name() + "\n";
-            }
-
-        }
-
-        for (Map.Entry<Denomination, Integer> Dim : cash.entrySet()) {
-            Denomination placeholder = Dim.getKey();
-            if (placeholder.amt() == .10) {
-                returnString += Dim.getValue() + " " + Dim.getKey().name() + "\n";
-            }
-
-        }
-
-        for (Map.Entry<Denomination, Integer> Nick : cash.entrySet()) {
-            Denomination placeholder = Nick.getKey();
-            if (placeholder.amt() == .05) {
-                returnString += Nick.getValue() + " " + Nick.getKey().name() + "\n";
-            }
-
-        }
-
-        for (Map.Entry<Denomination, Integer> Penn : cash.entrySet()) {
-            Denomination placeholder = Penn.getKey();
-            if (placeholder.amt() == .01) {
-                returnString += Penn.getValue() + " " + Penn.getKey().name() + "\n";
-            }
-
-        }
-
-
-
 
         return returnString;
     }
-
 }
