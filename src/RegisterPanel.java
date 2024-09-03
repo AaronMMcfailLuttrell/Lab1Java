@@ -14,6 +14,9 @@ public class RegisterPanel extends JPanel {
             Register.Quarter, Register.Dime, Register.Nickle, Register.Penny);
 
     public RegisterPanel() {
+        /*
+        RegisterPanel constructor sole purpose is to create the display
+        */
         this.setLayout(null);
         inputPanel.setSize(20000,200);
         inputPanel.setLocation(0,0);

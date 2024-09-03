@@ -8,7 +8,13 @@ import java.util.Map;
 
 public class PursePanel extends JPanel {
     private Purse purseGui;
-
+    //Declare constant variables for display purposes on dimensions of currency
+    static final int BILL_WIDTH = 200;
+    static final int BILL_HEIGHT = 75;
+    static final int COIN_SIDE_LENGTH = 100;
+    static final int CURRENCY_OFFSET_Y = 50;
+    static final int BILL_OFFSET_X = 200;
+    static final int COIN_OFFSET_X = 100;
     //Stored image string in descending order, chose array for sorting reasons
     private BufferedImage[] ImageGen = new BufferedImage[10];
 
@@ -27,7 +33,6 @@ public class PursePanel extends JPanel {
         super.paintComponent(g);
         positionY = 0;
         positionX = 0;
-        //g.drawImage(hundred, 0, 0, 300, 200, this);
         if (purseGui != null) {
             //Array keeps the descending order values from $100 to penny for future sorting use
             double[] descendingValuesArray = {100.00, 50.00, 20.00, 10.00, 5.00, 1.00, .25, .10, .05, .01};
@@ -48,19 +53,19 @@ public class PursePanel extends JPanel {
                         for (int u = 0; u < individualSet.getValue(); u++) {
                             //Graphic choice
                             if (individualSet.getKey().form() == "bill") {
-                                width = 200;
-                                height = 75;
+                                width = BILL_WIDTH;
+                                height = BILL_HEIGHT;
                             } else {
-                                width = 100;
-                                height = 100;
+                                width = COIN_SIDE_LENGTH;
+                                height = COIN_SIDE_LENGTH;
                             }
                             g.drawImage(ImageGen[i], positionX, positionY, width, height, this);
-                            positionY += 50; //Purposely made it where the currency stacks on top of each other so that more can fit
+                            positionY += CURRENCY_OFFSET_Y; //Purposely made it where the currency stacks on top of each other so that more can fit
                         }
                         if (individualSet.getKey().form() == "bill") {
-                            positionX += 200;
+                            positionX += BILL_OFFSET_X;
                         } else {
-                            positionX += 100;
+                            positionX += COIN_OFFSET_X;
                         }
 
                         positionY = 0;

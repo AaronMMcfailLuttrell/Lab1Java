@@ -37,10 +37,13 @@ public class Purse {
         //Array for storing information for future sorting
         double[] DescendingValues = {100.00, 50.00,20.00, 10.00, 5.00, 1.00, .25, .10, .05, .01};
 
+        //for sorting purposes, the outer loop goes through DescendingValues array and the inner loop searches for that value in the map and then displays the value
         for (int i = 0; i < DescendingValues.length; i++) {
             for (Map.Entry<Denomination, Integer> entry : cash.entrySet()) {
+                //Create a variable for easier access to the map entry key
                 Denomination placeholder = entry.getKey();
                 if (placeholder.amt() == DescendingValues[i]) {
+                    //If it finds the correct value, add the following to the returnString
                     returnString += entry.getValue() + " " + placeholder.name() + "\n";
                 }
             }
