@@ -14,6 +14,11 @@ public class Register {
     public static final Denomination Dime = new Denomination("Dime", .10, "coin", "src\\Dime.png");
     public static final Denomination Nickle = new Denomination("Nickle", .05, "coin", "src\\Nickel.jpg");
     public static final Denomination Penny = new Denomination("Penny", .01, "coin", "src\\Penny.png");
+    /*
+    DEFINE STRATEGY PATTERN
+     */
+    ConcreteContextOper oper = new ConcreteContextOper();
+
 
     //Calculate what amount of change to give the user (From highest value dollar to least value coin)
     Purse makeChange(double amt) {
@@ -24,8 +29,14 @@ public class Register {
         for (int i = 0; i < 10; i++) {
             countCurrency[i] = 0;
         }
+
+
+
+        oper.setOperations(new OperationMult());
         //Test to see if there is something like .005 which rounds to .01
-        double roundingCentCount = (amt * 100) % 100;
+        double roundingCentCount = oper.executeOperations(amt, 100.00);
+        oper.setOperations(new OperationModulus());
+        roundingCentCount = oper.executeOperations(roundingCentCount, 100.00);
 
         //Captures the .005 if the user inserts something like 12.735
         int anyRoundingSolving = (int)((roundingCentCount * 10) % 10);
@@ -46,47 +57,52 @@ public class Register {
 
         int amtInt = (int) amt; //Parses the whole number value of the user input, ex: user inputs 98.10, parses to 98
 
+
+        /*
+        IMPLEMENTS THE STRATEGY PATTERN
+         */
         //Does the subtraction for the whole value DOLLAR amounts and adds to each integer array
+        oper.setOperations(new OperationSub());
         while (amtInt >= 100) {
-            amtInt -= 100;
+            amtInt = (int) oper.executeOperations(amtInt, 100);
             countCurrency[0]++;
         }
         while (amtInt >= 50) {
-            amtInt -= 50;
+            amtInt = (int) oper.executeOperations(amtInt, 50);
             countCurrency[1]++;
         }
         while (amtInt >= 20) {
-            amtInt -= 20;
+            amtInt = (int) oper.executeOperations(amtInt, 20);
             countCurrency[2]++;
         }
         while (amtInt >= 10) {
-            amtInt -= 10;
+            amtInt = (int) oper.executeOperations(amtInt, 10);
             countCurrency[3]++;
         }
         while (amtInt >= 5) {
-            amtInt -= 5;
+            amtInt = (int) oper.executeOperations(amtInt, 5);
             countCurrency[4]++;
         }
         while (amtInt >= 1) {
-            amtInt -= 1;
+            amtInt = (int) oper.executeOperations(amtInt, 1);
             countCurrency[5]++;
         }
 
         //Does similar calculations to the above dollars, but for the CENT integer
         while (centCount >= 25) {
-            centCount -= 25;
+            centCount = (int) oper.executeOperations(centCount, 25);
             countCurrency[6]++;
         }
         while (centCount >= 10) {
-            centCount -= 10;
+            centCount = (int) oper.executeOperations(centCount, 10);
             countCurrency[7]++;
         }
         while (centCount >= 5) {
-            centCount -= 5;
+            centCount = (int) oper.executeOperations(centCount, 5);
             countCurrency[8]++;
         }
         while (centCount >= 1) {
-            centCount -= 1;
+            centCount = (int) oper.executeOperations(centCount, 1);
             countCurrency[9]++;
         }
 
