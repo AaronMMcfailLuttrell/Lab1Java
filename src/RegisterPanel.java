@@ -10,8 +10,10 @@ public class RegisterPanel extends JPanel {
     JPanel inputPanel = new JPanel();
     JTextField guideInput = new JTextField(1);
     JTextField input = new JTextField(1);
-    PursePanel pursePanel = new PursePanel(Register.Hundred, Register.Fifty, Register.Twenty, Register.Ten, Register.Five, Register.One,
-            Register.Quarter, Register.Dime, Register.Nickle, Register.Penny);
+    /*
+    INCORPORATES FACTORY METHOD PATTERN
+     */
+    PursePanel pursePanel = PursePanel.createPurseWithImages(Register.Hundred, Register.Fifty, Register.Twenty, Register.Ten, Register.Five, Register.One, Register.Quarter, Register.Dime, Register.Nickle, Register.Penny);
 
     public RegisterPanel() {
         /*

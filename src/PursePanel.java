@@ -76,27 +76,36 @@ public class PursePanel extends JPanel {
     }
 
 
-    PursePanel(Denomination...ImageStrings) throws RuntimeException {
+    private PursePanel(BufferedImage[] ImageStrings) throws RuntimeException {
         setLayout(null);
         setBackground(Color.darkGray);
         setSize(2000,1000);
         setLocation(0,210);
 
-        //Following code sets the image for each BufferedImage
+        /*
+        IMPLEMENTS FACTORY METHOD
+         */
+        this.ImageGen = ImageStrings;
+
+    }
+
+    /*
+    IMPLEMENT FACTORY METHOD PATTERN
+     */
+
+    public static PursePanel createPurseWithImages(Denomination...ImageStrings) {
+        BufferedImage[] images = new BufferedImage[10];
+
         try {
-            ImageGen[0] = ImageIO.read(new File(ImageStrings[0].img()));
-            ImageGen[1] = ImageIO.read(new File(ImageStrings[1].img()));
-            ImageGen[2] = ImageIO.read(new File(ImageStrings[2].img()));
-            ImageGen[3] = ImageIO.read(new File(ImageStrings[3].img()));
-            ImageGen[4] = ImageIO.read(new File(ImageStrings[4].img()));
-            ImageGen[5] = ImageIO.read(new File(ImageStrings[5].img()));
-            ImageGen[6] = ImageIO.read(new File(ImageStrings[6].img()));
-            ImageGen[7] = ImageIO.read(new File(ImageStrings[7].img()));
-            ImageGen[8] = ImageIO.read(new File(ImageStrings[8].img()));
-            ImageGen[9] = ImageIO.read(new File(ImageStrings[9].img()));
+            for (int i = 0; i < images.length; i++) {
+                images[i] = ImageIO.read(new File(ImageStrings[i].img()));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+        return new PursePanel(images);
+
     }
+
 }

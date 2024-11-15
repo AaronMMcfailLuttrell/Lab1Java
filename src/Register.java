@@ -62,6 +62,8 @@ public class Register {
         IMPLEMENTS THE STRATEGY PATTERN
          */
         //Does the subtraction for the whole value DOLLAR amounts and adds to each integer array
+
+        //setOperation sets the operation to only do subtraction until specified otherwise.
         oper.setOperations(new OperationSub());
         while (amtInt >= 100) {
             amtInt = (int) oper.executeOperations(amtInt, 100);
